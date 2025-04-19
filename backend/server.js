@@ -13,9 +13,9 @@ app.use(express.static('public'));
 
 // Database connection pool
 const pool = mysql.createPool({
-    host: process.env.DB_HOST || 'localhost',
-    user: process.env.DB_USER || 'root',
-    password: process.env.DB_PASSWORD || '',
+    host: process.env.DB_HOST || 'database-1.cisfopgowzmb.us-east-1.rds.amazonaws.com',
+    user: process.env.DB_USER || 'database-1',
+    password: process.env.DB_PASSWORD || 'om123456',
     database: process.env.DB_NAME || 'ecommerce_db',
     waitForConnections: true,
     connectionLimit: 10,
