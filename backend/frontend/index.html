@@ -10,19 +10,30 @@
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <!-- Navigation Bar -->
+
     <nav class="navbar">
         <div class="container">
             <a href="#" class="logo">FashionHub</a>
-            
+    
             <div class="nav-links" id="navLinks">
                 <a href="#home" class="active">Home</a>
                 <a href="#products">Products</a>
                 <a href="#about">About</a>
                 <a href="#contact">Contact</a>
-                <div class="auth-buttons">
-                    <button id="loginBtn">Login</button>
-                    <button id="signupBtn">Sign Up</button>
+                <div class="auth-section">
+                 
+                    <div class="auth-buttons" id="authButtons">
+                        <button id="loginBtn">Login</button>
+                        <button id="signupBtn">Sign Up</button>
+                    </div>
+                    <div class="user-avatar" id="userAvatar" style="display: none;">
+                        <span class="avatar-initials">SN</span>
+                        <div class="user-dropdown">
+                            <a href="#" class="dropdown-item">My Orders</a>
+                            <a href="#" class="dropdown-item">Account Settings</a>
+                            <a href="#" class="dropdown-item" id="logoutBtn">Logout</a>
+                        </div>
+                    </div>
                 </div>
                 <div class="cart-icon">
                     <i class="fas fa-shopping-cart"></i>
@@ -32,7 +43,7 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
+   
     <section class="hero" id="home">
         <div class="hero-content">
             <h1>Discover Your Perfect Style</h1>
@@ -46,7 +57,7 @@
 
     
 
-    <!-- Products Section -->
+  
     <section class="products" id="products">
         <div class="container">
             <h2>Featured Products</h2>
@@ -57,7 +68,7 @@
                 <button class="filter-btn" data-filter="accessories">Accessories</button>
             </div>
             <div class="product-grid" id="productGrid">
-                <!-- Products will be loaded dynamically -->
+                
             </div>
             <div class="load-more">
                 <button class="btn" id="loadMore">Load More</button>
@@ -65,7 +76,7 @@
         </div>
     </section>
 
-    <!-- About Section -->
+    
     <section class="about" id="about">
         <div class="container">
             <div class="about-content">
@@ -92,7 +103,7 @@
         </div>
     </section>
 
-    <!-- Testimonials -->
+    
     <section class="testimonials">
         <div class="container">
             <h2>What Our Customers Say</h2>
@@ -111,12 +122,12 @@
                         <h4>Priya Sharma</h4>
                     </div>
                 </div>
-                <!-- More testimonials would go here -->
+                
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
+    
     <section class="contact" id="contact">
         <div class="container">
             <h2>Contact Us</h2>
@@ -151,7 +162,7 @@
         </div>
     </section>
 
-    <!-- Newsletter -->
+    
     <section class="newsletter">
         <div class="container">
             <h3>Subscribe to Our Newsletter</h3>
@@ -163,7 +174,92 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    
+<section class="checkout" id="checkoutSection" style="display: none;">
+    <div class="container">
+        <h2>Checkout</h2>
+        <div class="checkout-grid">
+            <div class="checkout-form">
+                <h3>Shipping Information</h3>
+                <form id="checkoutForm">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mobile">Mobile Number</label>
+                        <input type="tel" id="mobile" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Shipping Address</label>
+                        <textarea id="address" rows="4" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="payment">Payment Method</label>
+                        <select id="payment" required>
+                            <option value="">Select Payment Method</option>
+                            <option value="googlepay">Google Pay</option>
+                            <option value="cod">Cash on Delivery</option>
+                        </select>
+                        
+<div class="payment-method-container" id="googlePayContainer" style="display: none;">
+    <h4>Google Pay</h4>
+    <div class="qr-code-container" id="qrCodeContainer">
+        
+    </div>
+    <div class="timer">
+        Time remaining: <span id="paymentTimer">05:00</span>
+    </div>
+    <p class="payment-instruction">Scan this QR code to complete your payment</p>
+</div>
+                    </div>
+                    <button type="submit" class="btn">Confirm Order</button>
+                </form>
+            </div>
+            <div class="order-summary">
+                <h3>Order Summary</h3>
+                <div class="order-items" id="orderItems">
+                    
+                </div>
+                <div class="order-total">
+                    <div class="total-row">
+                        <span>Subtotal:</span>
+                        <span>₹<span id="orderSubtotal">0</span></span>
+                    </div>
+                    <div class="total-row">
+                        <span>Shipping:</span>
+                        <span>₹<span id="orderShipping">0</span></span>
+                    </div>
+                    <div class="total-row grand-total">
+                        <span>Total:</span>
+                        <span>₹<span id="orderTotal">0</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div class="modal" id="orderConfirmationModal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="confirmation-content">
+            <i class="fas fa-check-circle"></i>
+            <h2>Order Confirmed!</h2>
+            <p>Your order has been placed successfully.</p>
+            <p>Order ID: <strong id="orderId"></strong></p>
+            <p>We've sent a confirmation to your email.</p>
+            <button class="btn" id="continueShoppingBtn">Continue Shopping</button>
+        </div>
+    </div>
+</div>
+
+    
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
@@ -200,12 +296,12 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2023 FashionHub. All Rights Reserved.</p>
+                <p>&copy; 2025 FashionHub. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Login Modal -->
+    
     <div class="modal" id="loginModal">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -231,7 +327,7 @@
         </div>
     </div>
 
-    <!-- Signup Modal -->
+    
     <div class="modal" id="signupModal">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -259,14 +355,14 @@
         </div>
     </div>
 
-    <!-- Cart Sidebar -->
+    
     <div class="cart-sidebar" id="cartSidebar">
         <div class="cart-header">
             <h3>Your Cart</h3>
             <span class="close-cart">&times;</span>
         </div>
         <div class="cart-items" id="cartItems">
-            <!-- Cart items will be loaded here -->
+            
         </div>
         <div class="cart-total">
             <div class="total-row">
@@ -285,7 +381,7 @@
         </div>
     </div>
 
-    <!-- Back to Top Button -->
+    
     <button class="back-to-top" id="backToTop">
         <i class="fas fa-arrow-up"></i>
     </button>

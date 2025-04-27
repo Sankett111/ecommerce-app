@@ -1,4 +1,4 @@
-// Sample product data (will be replaced with data from backend)
+
 const sampleProducts = [
     {
         id: 1,
@@ -38,7 +38,7 @@ const sampleProducts = [
     }
 ];
 
-// DOM Elements
+
 const productGrid = document.getElementById('productGrid');
 const loginBtn = document.getElementById('loginBtn');
 const signupBtn = document.getElementById('signupBtn');
@@ -49,7 +49,7 @@ const cartIcon = document.querySelector('.cart-icon');
 const cartSidebar = document.getElementById('cartSidebar');
 const closeCart = document.querySelector('.close-cart');
 
-// Display products
+
 function displayProducts(products) {
     productGrid.innerHTML = '';
     products.forEach(product => {
@@ -67,7 +67,7 @@ function displayProducts(products) {
     });
 }
 
-// Event Listeners
+
 loginBtn.addEventListener('click', () => {
     loginModal.style.display = 'block';
 });
@@ -100,12 +100,45 @@ closeCart.addEventListener('click', () => {
     cartSidebar.classList.remove('open');
 });
 
-// Initialize the page
+
 document.addEventListener('DOMContentLoaded', () => {
     displayProducts(sampleProducts);
     
-    // TODO: Fetch products from backend
-    // fetch('/api/products')
-    //     .then(response => response.json())
-    //     .then(products => displayProducts(products));
+    
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) {
+        
+        loginBtn.addEventListener('click', () => {
+            loginModal.style.display = 'block';
+        });
+        
+        signupBtn.addEventListener('click', () => {
+            signupModal.style.display = 'block';
+        });
+    }
+});
+
+window.addEventListener('click', (e) => {
+    if (e.target === loginModal) {
+        loginModal.style.display = 'none';
+    }
+    if (e.target === signupModal) {
+        signupModal.style.display = 'none';
+    }
+    if (e.target === checkoutModal) {
+        checkoutModal.style.display = 'none';
+    }
+    if (e.target === orderSuccessModal) {
+        orderSuccessModal.style.display = 'none';
+    }
+});
+
+
+closeButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        loginModal.style.display = 'none';
+        signupModal.style.display = 'none';
+        checkoutModal.style.display = 'none';
+        orderSuccessModal.style.display = 'none';
+    });
 });

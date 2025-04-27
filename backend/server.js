@@ -7,19 +7,19 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware
+
 app.use(cors());
 app.use(bodyParser.json());
 
-// Serve static frontend files
+
 app.use('/frontend',express.static(path.join(__dirname, 'frontend')));
 
-// Serve root route (index.html)
+
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'frontend', 'index.html')); // Make sure the path is correct
+    res.sendFile(path.join(__dirname, 'frontend', 'index.html')); 
 });
 
-// Database connection pool
+
 const pool = mysql.createPool({
     host: process.env.DB_HOST || 'database-1.cisfopgowzmb.us-east-1.rds.amazonaws.com',
     user: process.env.DB_USER || 'admin',
@@ -30,7 +30,7 @@ const pool = mysql.createPool({
     queueLimit: 0
 });
 
-// Test database connection
+
 async function testDbConnection() {
     try {
         const connection = await pool.getConnection();
@@ -42,16 +42,16 @@ async function testDbConnection() {
     }
 }
 
-// Routes
+
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/products', require('./routes/products'));
 
-// Start server
+
 app.listen(PORT,'0.0.0.0', async () => {
     console.log(`Server running on port ${PORT}`);
     await testDbConnection();
     
-    // Initialize database tables if they don't exist
+   
     try {
         await initDatabase();
         console.log('Database initialized');
@@ -60,12 +60,12 @@ app.listen(PORT,'0.0.0.0', async () => {
     }
 });
 
-// Initialize database tables
+
 async function initDatabase() {
     const connection = await pool.getConnection();
     
     try {
-        // Create users table
+        
         await connection.query(`
             CREATE TABLE IF NOT EXISTS users (
                 id INT AUTO_INCREMENT PRIMARY KEY,
@@ -76,7 +76,7 @@ async function initDatabase() {
             )
         `);
         
-        // Create products table
+        
         await connection.query(`
             CREATE TABLE IF NOT EXISTS products (
                 id INT AUTO_INCREMENT PRIMARY KEY,
@@ -88,7 +88,7 @@ async function initDatabase() {
             )
         `);
         
-        // Insert sample products if table is empty
+        
         const [products] = await connection.query('SELECT COUNT(*) as count FROM products');
         if (products[0].count === 0) {
             await connection.query(`
