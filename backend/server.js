@@ -2,6 +2,7 @@ const express = require('express');
 const mysql = require('mysql2/promise');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -9,7 +10,14 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static('public'));
+
+// Serve static frontend files
+app.use('/frontend',express.static(path.join(__dirname, 'frontend')));
+
+// Serve root route (index.html)
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'frontend', 'index.html')); // Make sure the path is correct
+});
 
 // Database connection pool
 const pool = mysql.createPool({
@@ -39,7 +47,7 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/products', require('./routes/products'));
 
 // Start server
-app.listen(PORT, async () => {
+app.listen(PORT,'0.0.0.0', async () => {
     console.log(`Server running on port ${PORT}`);
     await testDbConnection();
     
